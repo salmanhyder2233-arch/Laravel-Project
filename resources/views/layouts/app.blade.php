@@ -27,12 +27,12 @@
         <div class="nav-actions">
 
             <ul class="navbar-nav" id="navbarMenu">
-                <li><a href="{{ url('/') }}" class="nav-link">Home</a></li>
-                <li><a href="{{ url('/mission') }}" class="nav-link">Our Mission</a></li>
-                <li><a href="{{ url('/impact') }}" class="nav-link">Our Impact</a></li>
-                <li><a href="{{ url('/get-involved') }}" class="nav-link">Get Involved</a></li>
-                <li><a href="{{ url('/about') }}" class="nav-link">About Us</a></li>
-                <li><a href="{{ url('/contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a></li>
+                <li><a href="{{ url('/mission') }}" class="nav-link {{ request()->is('mission') ? 'active' : '' }}">Our Mission</a></li>
+                <li><a href="{{ url('/impact') }}" class="nav-link {{ request()->is('impact') ? 'active' : '' }}">Our Impact</a></li>
+                <li><a href="{{ url('/get-involved') }}" class="nav-link {{ request()->is('get-involved') ? 'active' : '' }}">Get Involved</a></li>
+                <li><a href="{{ url('/about') }}" class="nav-link {{ request()->is('about') ? 'active' : '' }}">About Us</a></li>
+                <li><a href="{{ url('/contact') }}" class="nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
             </ul>
 
             <button id="themeToggle" class="paint-btn">

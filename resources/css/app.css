@@ -299,6 +299,14 @@ body.dark-mode .footer p{
     gap:20px;
 }
 
+.nav-link.active{
+    color: salmon;
+}
+
+.nav-link.active::after{
+    transform: translateX(-50%) scaleX(1);
+}
+
 /* Hamburger toggle */
 .menu-toggle{
     display: none;

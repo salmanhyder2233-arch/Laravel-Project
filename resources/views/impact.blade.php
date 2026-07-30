@@ -23,13 +23,13 @@
     </div>
 
     <div class="stat-card">
-        <i class="fa-solid fa-people-group stat-icon"></i>
+        <i class="fa-solid fa-people-group stat-"></i>
         <h2>—</h2>
         <p>Community Projects</p>
     </div>
 
     <div class="stat-card">
-        <i class="fa-solid fa-heart stat-icon"></i>
+        <i class="fa-solid fa-heart stat-"></i>
         <h2>—</h2>
         <p>Lives Reached</p>
     </div>
