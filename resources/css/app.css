@@ -1,0 +1,1092 @@
+/* =========================================================
+   TAILWIND SETUP
+   ========================================================= */
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+/* =========================================================
+   BASE / RESET
+   ========================================================= */
+
+body{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #FFFCF8;
+
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* soft radial-gradient background decor, fixed behind all content */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+
+    background:
+        radial-gradient(circle at 8% 12%, rgba(255,105,180,.12) 0 120px, transparent 130px),
+        radial-gradient(circle at 92% 82%, rgba(255,230,90,.18) 0 180px, transparent 190px),
+        radial-gradient(circle at 85% 15%, rgba(255,192,203,.10) 0 90px, transparent 100px),
+        radial-gradient(circle at 15% 90%, rgba(255,240,160,.15) 0 120px, transparent 130px);
+}
+
+
+/* =========================================================
+   DARK MODE OVERRIDES
+   ========================================================= */
+
+/* ---------- Global ---------- */
+
+body.dark-mode{
+    background-color: #1a1a1a;
+    color: #eee;
+}
+
+body.dark-mode label{
+    color: #eee;
+}
+
+
+/* ---------- Navbar ---------- */
+
+body.dark-mode .navbar-sticky{
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+body.dark-mode .navbar-title{
+    color: #eee;
+}
+
+body.dark-mode .navbar-toggle{
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .paint-btn{
+    background: #2a2a2a;
+    box-shadow: 0 0 0 2px salmon inset;
+}
+
+body.dark-mode .bucket{
+    color: #eee;
+}
+
+
+/* ---------- Hero (Home page) ---------- */
+
+body.dark-mode .hero{
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .hero h1{
+    color: #eee;
+}
+
+body.dark-mode .hero p{
+    color: #bbb;
+}
+
+body.dark-mode .lily{
+    filter:
+        drop-shadow(0 0 4px #ffe7e7)
+        drop-shadow(0 0 8px #ffe7e7);
+}
+
+
+/* ---------- Page Headers (Mission / Impact / About / Contact / Get Involved) ---------- */
+
+body.dark-mode .page-header,
+body.dark-mode .donate-hero{
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .page-header h1,
+body.dark-mode .donate-hero h1{
+    color: #eee;
+}
+
+body.dark-mode .page-header p,
+body.dark-mode .donate-hero p{
+    color: #bbb;
+}
+
+
+/* ---------- Cards (content / stat / hobby / image / jumbotron) ---------- */
+
+body.dark-mode .content-card,
+body.dark-mode .stat-card{
+    background-color: #2a2a2a;
+    color: #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+body.dark-mode .content-card h2,
+body.dark-mode .stat-card h2{
+    color: #eee;
+}
+
+body.dark-mode .content-card:hover,
+body.dark-mode .stat-card:hover{
+    box-shadow: 0 10px 32px rgba(250, 128, 114, 0.4);
+}
+
+body.dark-mode .stat-icon{
+    color: salmon;
+}
+
+body.dark-mode .hobby-card,
+body.dark-mode .image-card{
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+body.dark-mode .hobby-card:hover,
+body.dark-mode .image-card:hover{
+    box-shadow: 0 10px 32px rgba(250, 128, 114, 0.4);
+    border-color: salmon;
+}
+
+body.dark-mode .jumbotron{
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+body.dark-mode .jumbotron:hover{
+    box-shadow: 0 8px 32px rgba(250, 128, 114, 0.45);
+}
+
+
+/* ---------- Mission CTA ---------- */
+
+body.dark-mode .mission-cta h2{
+    color: #eee;
+}
+
+body.dark-mode .mission-cta p{
+    color: #bbb;
+}
+
+
+/* ---------- Forms ---------- */
+
+body.dark-mode .form-control{
+    background-color: #2a2a2a;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-mode .form-control::placeholder{
+    color: #999;
+}
+
+
+/* ---------- Footer ---------- */
+
+body.dark-mode .footer{
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .footer p{
+    color: #ccc;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar-sticky{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 250, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    z-index: 1000;
+}
+
+.navbar-container{
+    max-width: 1250px;
+    margin: auto;
+    padding: 18px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+}
+
+.navbar-title{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2d2d2d;
+    text-decoration: none;
+    letter-spacing: .5px;
+    transition: color .25s ease;
+}
+
+.navbar-title:hover{
+    color: rgb(255, 98, 150);
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    gap: 34px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link{
+    position: relative;
+
+    font-family: "Inter", sans-serif;
+    font-size: .97rem;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    letter-spacing: .4px;
+
+    transition: color .25s ease;
+}
+
+.nav-link:hover{
+    color: salmon;
+}
+
+.nav-link::after{
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+
+    width: 100%;
+    height: 2px;
+
+    background: salmon;
+
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+
+    transition: transform .28s ease;
+}
+
+.nav-link:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+/* Hamburger toggle */
+.menu-toggle{
+    display: none;
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 2rem;
+    color: salmon;
+
+    transition: .25s;
+}
+
+.menu-toggle:hover{
+    color: salmon;
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    position: relative;
+    overflow: hidden;
+
+    height: 85vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:50px;
+
+    background:#F8F5F0;
+}
+
+.hero h1{
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3.5rem,8vw,5.5rem);
+    font-weight: 700;
+
+    margin-bottom: 15px;
+
+    color: #2f2f2f;
+}
+
+.hero p{
+    max-width: 700px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 1.1rem;
+    line-height: 1.9;
+
+    color: #666;
+}
+
+.hero a{
+    margin-top: 35px;
+
+    padding: 15px 34px;
+
+    background: rgb(255, 92, 105);
+    color: white;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    border-radius: 50px;
+
+    transition: .3s ease;
+}
+
+.hero h1,
+.hero p,
+.hero a{
+    position: relative;
+    z-index: 1;
+}
+
+.hero a:hover{
+    background: rgb(255, 123, 134);
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 30px rgba(250,128,114,.35);
+}
+
+.hero a:active{
+    background-color: rgb(255, 80, 95);
+    transform: scale(0.96);
+}
+
+.page-header,
+.donate-hero{
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAINT BUCKET (DARK MODE TOGGLE) BUTTON
+   ========================================================= */
+
+.paint-btn{
+    position: static;
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #2a2a2a;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+}
+
+.paint-btn:hover{
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 15px 35px rgba(250, 128, 114, .5);
+}
+
+.paint-btn:active{
+    transform: scale(.92);
+}
+
+.bucket{
+    font-size: 24px;
+    color: rgba(255, 250, 242);
+    transition: transform .8s cubic-bezier(.68,-0.6,.32,1.6), filter .3s ease;
+    transform-origin: center center;
+}
+
+.paint-btn:hover .bucket{
+    filter: drop-shadow(0 0 8px rgba(0,0,0,.25));
+}
+
+.bucket.pouring{
+    transform: rotate(-55deg);
+}
+
+#paintOverlay{
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #2a2a2a;
+    z-index: 6698;
+    overflow: visible;
+    transform: translateY(0);
+    pointer-events: none;
+}
+
+#paintOverlay.cover{
+    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
+    transform: translateY(100vh);
+}
+
+#paintOverlay.reveal{
+    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
+    transform: translateY(200vh);
+}
+
+.wave-edge{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#paintOverlay.cover .wave-edge,
+#paintOverlay.reveal .wave-edge{
+    opacity: 1;
+}
+
+
+/* =========================================================
+   DECORATIONS (sparkles + lilies)
+   ========================================================= */
+
+.sparkle{
+    position:absolute;
+    font-size:28px;
+    color:#F85C9B;
+    opacity:.25;
+    animation:twinkle 4s ease-in-out infinite;
+}
+
+.sparkle-1{
+    top:15%;
+    left:12%;
+}
+
+.sparkle-2{
+    top:26%;
+    right:14%;
+    font-size:42px;
+    animation-delay:1s;
+}
+
+.sparkle-2-small{
+    top:23%;
+    right:11.5%;
+    font-size:18px;
+    opacity:.18;
+    animation:twinkle 4s ease-in-out infinite;
+    animation-delay:1.5s;
+}
+
+.sparkle-3{
+    bottom:18%;
+    left:25%;
+    animation-delay:2s;
+}
+
+.sparkle:nth-child(2){
+    animation-delay:1.5s;
+}
+
+.sparkle:nth-child(3){
+    animation-delay:3s;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.9);
+    }
+    50%{
+        opacity:.8;
+        transform:scale(1.15);
+    }
+}
+
+.lily{
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .5;
+
+    filter:
+        drop-shadow(0 0 3px rgb(255, 103, 103))
+        drop-shadow(0 0 6px rgb(255, 103, 103))
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+
+.lily-left{
+    width: 300px;
+    left: 0;
+    top: 0;
+    opacity: .5;
+    transform: none;
+}
+
+.lily-right{
+    width: 420px;
+    right: 0;
+    bottom: 0;
+    opacity: .55;
+    transform: scaleX(-1) scaleY(-1);
+}
+
+.content-icon{
+    font-size: 2rem;
+    color: salmon;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    background: #F5EFE6;
+    border-top: 1px solid rgba(0,0,0,.08);
+    margin-top: 80px;
+    bottom: 0;
+}
+
+.footer-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer p{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: .95rem;
+    color: #666;
+    letter-spacing: .3px;
+}
+
+
+/* =========================================================
+   GET INVOLVED / DONATE PAGE
+   ========================================================= */
+
+.donate-hero{
+    padding:100px 25px 70px;
+    text-align:center;
+    background:#F8F5F0;
+}
+
+.donate-hero h1{
+    font-family:"Cormorant Garamond",serif;
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.donate-hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:1.05rem;
+    color:#666;
+    line-height:1.8;
+}
+
+.donation-section{
+    display:flex;
+    justify-content:center;
+    padding:80px 20px;
+}
+
+.donation-card{
+    width:500px;
+    max-width:100%;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.donation-card h2{
+    margin-bottom:20px;
+}
+
+.qr-box img{
+    width:220px;
+    margin:30px auto;
+    display:block;
+}
+
+.payment-details{
+    margin-top:20px;
+    line-height:1.8;
+}
+
+.donate-btn{
+    margin-top:25px;
+
+    background:salmon;
+    color:white;
+
+    border:none;
+    border-radius:50px;
+
+    padding:14px 32px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.donate-btn:hover{
+    background:#e56f61;
+    transform:translateY(-2px);
+}
+
+.confirmation-section{
+    max-width:700px;
+    margin:0 auto 100px;
+    text-align:center;
+    padding:0 20px;
+}
+
+.confirmation-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    margin-top:35px;
+}
+
+.confirmation-form input,
+.confirmation-form textarea{
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:1rem;
+}
+
+.confirmation-form input:focus,
+.confirmation-form textarea:focus{
+    outline:none;
+    border-color:salmon;
+}
+
+
+/* ============== GENERIC PAGE COMPONENTS ============== */
+
+.page-header{
+    background:#F8F5F0;
+    padding:90px 20px;
+    text-align:center;
+}
+
+.page-header h1,
+.page-header p{
+    position: relative;
+    z-index: 1;
+}
+
+.page-header h1{
+    font-family:"Cormorant Garamond", serif;
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.page-header p{
+    max-width:700px;
+    margin:auto;
+    color:#666;
+    line-height:1.8;
+}
+
+.content-section{
+    max-width:1100px;
+    margin:80px auto;
+    padding:0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.content-card,
+.stat-card{
+    background:white;
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);
+
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.content-card:hover,
+.stat-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.12);
+}
+
+.content-card h2,
+.stat-card h2{
+    font-family:"Cormorant Garamond", serif;
+}
+
+.stats-grid{
+    max-width: 1100px;
+    margin: 80px auto 100px;
+    padding: 0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.mission-cta{
+    max-width: 700px;
+    margin: 0 auto 100px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.mission-cta h2{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.mission-cta p{
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.stat-icon{
+    font-size: 2rem;
+    color: salmon;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* ============== CONTACT PAGE ============== */
+
+.contact-section{
+    max-width:700px;
+    margin:80px auto;
+    padding:0 20px;
+}
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:"Inter", sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:none;
+    border-color:salmon;
+}
+
+.btn-primary{
+    display: inline-block;
+    margin-top: 15px;
+    padding:15px 30px;
+    border:none;
+    background:salmon;
+    color:white;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+    text-decoration: none;
+}
+
+.btn-primary:hover{
+    background:#e56f61;
+    transform:translateY(-2px);
+}
+
+
+/* ============== RESPONSIVE============== */
+
+@media (max-width: 1024px){
+
+    /* navbar */
+    .navbar-container{
+        padding:16px 24px;
+    }
+
+    /* hero */
+    .hero h1{
+        font-size:3.8rem;
+    }
+
+    .hero p{
+        max-width:600px;
+    }
+
+    /* decorations */
+    .lily-left{ width: 150px; }
+    .lily-right{ width: 230px; }
+}
+
+@media (max-width: 900px){
+
+    /* navbar */
+    .navbar-container{
+        padding: 16px 24px;
+    }
+
+    .navbar-title{
+        font-size: 1.8rem;
+    }
+
+    .menu-toggle{
+        display: block;
+        position: relative;
+        z-index: 6701; /* stays above/independent of paint-btn */
+    }
+
+    .navbar-nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: calc(100% + 12px);
+
+        background: rgba(255,255,255,.98);
+        border-radius: 18px;
+        padding: 30px 0;
+        box-shadow: 0 15px 40px rgba(0,0,0,.12);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px);
+
+        transition:
+            opacity .25s ease,
+            transform .25s ease,
+            visibility .25s;
+    }
+
+    .navbar-nav.active{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* paint bucket — shifted left so it clears the hamburger */
+    .paint-btn{
+        top: 10px;
+        right: 60px;
+        width: 36px;
+        height: 36px;
+    }
+
+}
+
+@media (max-width: 768px){
+
+    /* navbar */
+    .navbar-container{
+        padding:16px 20px;
+    }
+
+    .navbar-title{
+        font-size:1.8rem;
+    }
+
+    .navbar-nav{
+        display:none;
+        flex-direction:column;
+
+        position:absolute;
+        top:100%;
+        left:20px;
+        right:20px;
+
+        background:#fff;
+        border-radius:18px;
+        padding:25px;
+        gap:18px;
+
+        box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+        opacity:0;
+        visibility:hidden;
+        transform:translateY(-15px);
+
+        transition:.3s;
+    }
+
+    .navbar-nav.active{
+        display:flex;
+        opacity:1;
+        visibility:visible;
+        transform:translateY(0);
+    }
+
+    /* hero */
+    .hero{
+        height:auto;
+        min-height:60vh;
+        padding:90px 25px 60px;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+        max-width:500px;
+    }
+
+    .hero a{
+        padding:14px 28px;
+    }
+
+    /* decorations */
+    .lily-left{
+    width: 120px;
+    left: -20px;
+    top: 80px;
+    }
+    .lily-right{
+    width: 190px;
+    right: -30px;
+    bottom: 30px;
+    }
+
+    .sparkle{
+        transform:scale(.85);
+    }
+
+    .sparkle-2{
+        font-size:32px;
+    }
+
+    .sparkle-2-small{
+        font-size:14px;
+    }
+
+}
+
+@media (max-width: 480px){
+
+    /* navbar */
+    .navbar-title{
+        font-size:1.5rem;
+    }
+
+    /* hero */
+    .hero{
+        min-height:50vh;
+        padding:80px 20px 50px;
+    }
+
+    .hero h1{
+        font-size:2.3rem;
+        line-height:1.15;
+    }
+
+    .hero p{
+        font-size:.95rem;
+    }
+
+    .hero a{
+        width:100%;
+        max-width:260px;
+        text-align:center;
+    }
+
+    /* decorations */
+    .lily-right{
+        display:none;
+    }
+
+    .sparkle-1{
+        display:none;
+    }
+
+    /* paint bucket */
+    .paint-btn{
+        top: 8px;
+        right: 52px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .bucket{
+        font-size: 18px;
+    }
+
+}
