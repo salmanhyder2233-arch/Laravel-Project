@@ -49,33 +49,33 @@
 
 </section>
 
-<section class="confirmation-section">
+<section class="contact-section">
+    <h2 style="text-align:center;">Apply to Help</h2>
+    <p style="text-align:center; color:#666;">Choose a role and tell us a bit about yourself.</p>
 
-    <h2>Donation Confirmation</h2>
+    <form class="contact-form" method="POST" action="{{ route('apply.send') }}">
+        @csrf
 
-    <p>
-        Already donated? Let us know so we can thank you and keep accurate
-        records.
-    </p>
+        <input type="text" name="name" placeholder="Full Name" value="{{ old('name') }}">
+        <input type="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
 
-    <form class="confirmation-form">
+        <select name="role" required>
+            <option value="" disabled selected>Which role are you applying for?</option>
+            <option value="Role 1 Name">Ambassador</option>
+            <option value="Role 2 Name">Finance Manager</option>
+            <option value="Role 3 Name">Social Media</option>
+            <option value="Role 4 Name">Management</option>
+            <option value="Volunteer">Volunteer</option>
+        </select>
 
-        <input type="text" placeholder="Your Name (Optional)">
+        <textarea name="message" rows="5" placeholder="Anything you'd like us to know? (optional)">{{ old('message') }}</textarea>
 
-        <input type="email" placeholder="Email Address">
-
-        <input type="text" placeholder="Transaction ID">
-
-        <input type="number" placeholder="Donation Amount (PKR)">
-
-        <textarea rows="5" placeholder="Leave a message (Optional)"></textarea>
-
-        <button type="submit" class="donate-btn">
-            Submit
-        </button>
-
+        <button type="submit" class="btn-primary">Submit Application</button>
     </form>
 
+    @if (session('success'))
+        <p style="color: green; text-align:center; margin-top: 15px;">{{ session('success') }}</p>
+    @endif
 </section>
 
 <script>
