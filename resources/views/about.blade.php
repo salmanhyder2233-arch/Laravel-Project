@@ -14,7 +14,7 @@
     </p>
 </section>
 
-<section class="content-section">
+<section class="stats-grid">
 
     <div class="content-card">
         <h2>Who We Are</h2>
@@ -37,7 +37,7 @@
 
 </section>
 
-<section class="content-section">
+<section class="stats-grid">
 
     <div class="stat-card">
         <h2>Ruhab Adnan</h2>

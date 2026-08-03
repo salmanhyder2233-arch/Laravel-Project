@@ -25,7 +25,7 @@
     </a>
 
 </section>
-<section class="content-section">
+<section class="stats-grid">
 
     <div class="content-card">
         <h2>Our Mission</h2>
