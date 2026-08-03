@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactFormSubmitted;
 use App\Models\ContactSubmission;
 
 class ContactController extends Controller
@@ -20,7 +18,7 @@ class ContactController extends Controller
 
         ContactSubmission::create($validated);
 
-        Mail::to('twcorg.pk@gmail.com')->send(new ContactFormSubmitted($validated));
+// Email temporarily disabled while configuring production
 
         return back()->with('success', 'Message sent — thanks for reaching out!');
     }
