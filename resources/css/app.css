@@ -919,8 +919,10 @@ body.dark-mode .contact-form select{
     padding:0 20px;
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap:30px;
+
+    box-sizing: border-box;
 }
 
 .content-card,
@@ -951,8 +953,10 @@ body.dark-mode .contact-form select{
     padding: 0 20px;
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap:30px;
+
+    box-sizing: border-box;
 }
 
 .mission-cta{
@@ -1275,6 +1279,11 @@ body.dark-mode .toggle-password-btn{
 
     .bucket{
         font-size: 18px;
+    }
+    
+    .content-card,
+    .stat-card{
+        padding: 25px;
     }
 
 }

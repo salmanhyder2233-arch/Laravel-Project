@@ -14,7 +14,7 @@
     </p>
 </section>
 
-<section class="stats-grid">
+<section class="content-section">
 
     <div class="content-card">
         <h2>Who We Are</h2>

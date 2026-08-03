@@ -14,7 +14,7 @@
     </p>
 </section>
 
-<section class="stats-grid">
+<section class="content-section">
 
     <div class="content-card">
         <i class="fa-solid fa-book content-icon"></i>
