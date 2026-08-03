@@ -55,7 +55,7 @@
     </div> 
         
     <div class="stat-card">
-        <h2>Rameesha Sehar</h2>
+        <h2>Ume Rubab</h2>
         <p>AS level Student</p>
     </div>
 

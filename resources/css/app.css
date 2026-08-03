@@ -823,7 +823,7 @@ body{
 
 .admin-section{
     max-width: 800px;
-    margin: 0 auto 100px;
+    margin: 50px auto 100px;
     padding: 0 20px;
 
     display: flex;
@@ -1038,7 +1038,7 @@ body.dark-mode .contact-form select{
     margin-top: 15px;
     padding:15px 30px;
     border:none;
-    background:salmon;
+    background: rgb(255, 92, 105);
     color:white;
     border-radius:50px;
     cursor:pointer;
@@ -1047,8 +1047,13 @@ body.dark-mode .contact-form select{
 }
 
 .btn-primary:hover{
-    background:#e56f61;
+    background:rgb(255, 123, 134);
     transform:translateY(-2px);
+}
+
+.btn-primary:active{
+    background-color: rgb(255, 80, 95);
+    transform: scale(0.96);
 }
 
 .password-field{
