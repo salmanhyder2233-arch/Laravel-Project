@@ -29,10 +29,6 @@
                 funding outreach programs, and bringing hope to those who need it most.
             </p>
 
-            <div class="qr-box">
-                <img src="{{ asset('images/qr-placeholder.jpeg') }}" alt="Scan to donate">
-            </div>
-
             <div class="payment-details">
                 <p><strong>JazzCash Number</strong></p>
                 <p>03154706813</p>
