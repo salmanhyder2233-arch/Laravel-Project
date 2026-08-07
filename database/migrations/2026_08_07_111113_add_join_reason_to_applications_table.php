@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->text('join_reason');
+            $table->text('join_reason')->nullable();
         });
     }
-
     /**
      * Reverse the migrations.
      */
