@@ -19,7 +19,15 @@
    BASE / RESET
    ========================================================= */
 
+html{
+    height: 100%;
+}
+
 body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
     margin: 0;
     font-family: "Inter", sans-serif;
     background: #FFFCF8;
@@ -41,6 +49,885 @@ body::before{
         radial-gradient(circle at 92% 82%, rgba(255,230,90,.18) 0 180px, transparent 190px),
         radial-gradient(circle at 85% 15%, rgba(255,192,203,.10) 0 90px, transparent 100px),
         radial-gradient(circle at 15% 90%, rgba(255,240,160,.15) 0 120px, transparent 130px);
+}
+
+
+/* =========================================================
+   SITE-WIDE COMPONENTS
+   ========================================================= */
+
+/* ---------- Navbar ---------- */
+
+.navbar-sticky{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 250, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    z-index: 1000;
+}
+
+.navbar-container{
+    max-width: 1250px;
+    margin: auto;
+    padding: 18px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+}
+
+.navbar-title{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2d2d2d;
+    text-decoration: none;
+    letter-spacing: .5px;
+    transition: color .25s ease;
+}
+
+.navbar-title:hover{
+    color: rgb(255, 98, 150);
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    gap: 34px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link{
+    position: relative;
+
+    font-family: "Inter", sans-serif;
+    font-size: .97rem;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    letter-spacing: .4px;
+
+    transition: color .25s ease;
+}
+
+.nav-link:hover{
+    color: salmon;
+}
+
+.nav-link::after{
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+
+    width: 100%;
+    height: 2px;
+
+    background: salmon;
+
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+
+    transition: transform .28s ease;
+}
+
+.nav-link:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link.active{
+    color: salmon;
+}
+
+.nav-link.active::after{
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+/* Hamburger toggle */
+.menu-toggle{
+    display: none;
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 2rem;
+    color: salmon;
+
+    transition: .25s;
+}
+
+.menu-toggle:hover{
+    color: salmon;
+    transform: rotate(90deg);
+}
+
+
+/* ---------- Dark Mode Toggle (paint bucket) button + animation ---------- */
+
+.paint-btn{
+    position: static;
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #2a2a2a;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+}
+
+.paint-btn:hover{
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 15px 35px rgba(250, 128, 114, .5);
+}
+
+.paint-btn:active{
+    transform: scale(.92);
+}
+
+.bucket{
+    font-size: 24px;
+    color: rgba(255, 250, 242);
+    transition: transform .8s cubic-bezier(.68,-0.6,.32,1.6), filter .3s ease;
+    transform-origin: center center;
+}
+
+.paint-btn:hover .bucket{
+    filter: drop-shadow(0 0 8px rgba(0,0,0,.25));
+}
+
+.bucket.pouring{
+    transform: rotate(-55deg);
+}
+
+#paintOverlay{
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #2a2a2a;
+    z-index: 6750;
+    overflow: visible;
+    transform: translateY(0);
+    pointer-events: none;
+}
+
+#paintOverlay.cover{
+    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
+    transform: translateY(100vh);
+}
+
+#paintOverlay.reveal{
+    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
+    transform: translateY(200vh);
+}
+
+.wave-edge{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#paintOverlay.cover .wave-edge,
+#paintOverlay.reveal .wave-edge{
+    opacity: 1;
+}
+
+
+/* ---------- Decorations (sparkles + lilies, used across pages) ---------- */
+
+.sparkle{
+    position:absolute;
+    font-size:28px;
+    color:#F85C9B;
+    opacity:.25;
+    animation:twinkle 4s ease-in-out infinite;
+}
+
+.sparkle-1{
+    top:15%;
+    left:12%;
+}
+
+.sparkle-2{
+    top:26%;
+    right:14%;
+    font-size:42px;
+    animation-delay:1s;
+}
+
+.sparkle-2-small{
+    top:23%;
+    right:11.5%;
+    font-size:18px;
+    opacity:.18;
+    animation:twinkle 4s ease-in-out infinite;
+    animation-delay:1.5s;
+}
+
+.sparkle-3{
+    bottom:18%;
+    left:25%;
+    animation-delay:2s;
+}
+
+.sparkle:nth-child(2){
+    animation-delay:1.5s;
+}
+
+.sparkle:nth-child(3){
+    animation-delay:3s;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.9);
+    }
+    50%{
+        opacity:.8;
+        transform:scale(1.15);
+    }
+}
+
+.lily{
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .5;
+
+    filter:
+        drop-shadow(0 0 3px rgb(255, 103, 103))
+        drop-shadow(0 0 6px rgb(255, 103, 103))
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+
+.lily-left{
+    width: 300px;
+    left: 0;
+    top: 0;
+    opacity: .5;
+    transform: none;
+}
+
+.lily-right{
+    width: 420px;
+    right: 0;
+    bottom: 0;
+    opacity: .55;
+    transform: scaleX(-1) scaleY(-1);
+}
+
+.content-icon{
+    font-size: 2rem;
+    color: salmon;
+    margin-bottom: 12px;
+    display: block;
+}
+
+
+/* ---------- Generic reusable buttons ---------- */
+
+.hero-btn{
+    margin-top: 35px;
+    padding: 15px 34px;
+    border: none;
+    background: rgb(255, 92, 105);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-btn:hover{
+    background: rgb(255, 123, 134);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(250,128,114,.35);
+}
+
+.hero-btn:active{
+    background-color: rgb(255, 80, 95);
+    transform: scale(0.96);
+}
+
+.btn-primary{
+    display: inline-block;
+    margin-top: 15px;
+    padding:15px 30px;
+    border:none;
+    background: rgb(255, 92, 105);
+    color:white;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+    text-decoration: none;
+}
+
+.btn-primary:hover{
+    background:rgb(255, 123, 134);
+    transform:translateY(-2px);
+}
+
+.btn-primary:active{
+    background-color: rgb(255, 80, 95);
+    transform: scale(0.96);
+}
+
+.delete-btn{
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: 1px solid #e56f61;
+    background: transparent;
+    color: #e56f61;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: .85rem;
+    transition: .3s;
+}
+
+.delete-btn:hover{
+    background: #e56f61;
+    color: white;
+}
+
+
+/* ---------- Generic page header (used on Mission / Impact / About / Contact / Get Involved) ---------- */
+
+.page-header,
+.donate-hero{
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header{
+    background:#F8F5F0;
+    padding:90px 20px;
+    text-align:center;
+}
+
+.page-header h1,
+.page-header p{
+    position: relative;
+    z-index: 1;
+}
+
+.page-header h1{
+    font-family:"Cormorant Garamond", serif;
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.page-header p{
+    max-width:700px;
+    margin:auto;
+    color:#666;
+    line-height:1.8;
+}
+
+.page-header .hero-btn{
+    margin-top: 25px;
+}
+
+
+/* ---------- Generic content cards (used on Home / Mission / About) ---------- */
+
+.content-section{
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.content-card{
+    flex: 1 1 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.content-card,
+.stat-card{
+    background:white;
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);
+
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.content-card:hover,
+.stat-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.12);
+}
+
+.content-card h2,
+.stat-card h2{
+    font-family:"Cormorant Garamond", serif;
+}
+
+
+/* ---------- Generic stat grid (used on About / Impact) ---------- */
+
+.stats-grid{
+    max-width: 1100px;
+    margin: 80px auto 100px;
+    padding: 0 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+
+    box-sizing: border-box;
+}
+
+.stat-card{
+    flex: 1 1 250px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.stat-icon{
+    font-size: 2rem;
+    color: salmon;
+    margin-bottom: 12px;
+    display: block;
+}
+
+
+/* ---------- Shared form styling (used on Contact + Get Involved apply form) ---------- */
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:"Inter", sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:none;
+    border-color:salmon;
+}
+
+.contact-form select{
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    background: white;
+    color: #333;
+    cursor: pointer;
+
+    appearance: none;              /* removes browser's default select styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+    padding-right: 45px;           /* room for the custom arrow */
+}
+
+.contact-form select:focus{
+    outline: none;
+    border-color: salmon;
+    box-shadow: 0 0 0 3px rgba(250,128,114,.15);   /* soft glow instead of harsh blue ring */
+}
+
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.hero{
+    position: relative;
+    overflow: hidden;
+
+    height: 85vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:50px;
+
+    background:#F8F5F0;
+}
+
+.hero h1{
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3.5rem,8vw,5.5rem);
+    font-weight: 700;
+
+    margin-bottom: 15px;
+
+    color: #2f2f2f;
+}
+
+.hero p{
+    max-width: 700px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 1.1rem;
+    line-height: 1.9;
+
+    color: #666;
+}
+
+.hero a{
+    margin-top: 35px;
+
+    padding: 15px 34px;
+
+    background: rgb(255, 92, 105);
+    color: white;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    border-radius: 50px;
+
+    transition: .3s ease;
+}
+
+.hero h1,
+.hero p,
+.hero a{
+    position: relative;
+    z-index: 1;
+}
+
+.hero a:hover{
+    background: rgb(255, 123, 134);
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 30px rgba(250,128,114,.35);
+}
+
+.hero a:active{
+    background-color: rgb(255, 80, 95);
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   MISSION PAGE
+   ========================================================= */
+
+.mission-cta{
+    max-width: 700px;
+    margin: 0 auto 100px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.mission-cta h2{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.mission-cta p{
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+
+
+/* =========================================================
+   GET INVOLVED (DONATE + APPLY)
+   ========================================================= */
+
+.donate-hero{
+    padding:100px 25px 70px;
+    text-align:center;
+    background:#F8F5F0;
+}
+
+.donate-hero h1{
+    font-family:"Cormorant Garamond",serif;
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.donate-hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:1.05rem;
+    color:#666;
+    line-height:1.8;
+}
+
+.donation-section{
+    display:flex;
+    justify-content:center;
+    padding:80px 20px;
+}
+
+.donation-card{
+    width:500px;
+    max-width:100%;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.donation-card h2{
+    margin-bottom:20px;
+}
+
+.qr-box img{
+    width:220px;
+    margin:30px auto;
+    display:block;
+}
+
+.payment-details{
+    margin-top:20px;
+    line-height:1.8;
+}
+
+.donate-btn{
+    margin-top:25px;
+
+    background:salmon;
+    color:white;
+
+    border:none;
+    border-radius:50px;
+
+    padding:14px 32px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.donate-btn:hover{
+    background:#e56f61;
+    transform:translateY(-2px);
+}
+
+/* apply form section — renamed from .contact-section to avoid colliding
+   with the real Contact page's .contact-section above */
+.apply-section{
+    padding-top: 60px;
+}
+
+/* side-by-side layout wrapper for donation card + apply form */
+.apply-donate-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.apply-donate-wrapper .donation-section,
+.apply-donate-wrapper .apply-section{
+    flex: 1 1 450px;
+    max-width: 500px;
+    margin: 80px 0;
+    padding: 0;
+}
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+
+.contact-section{
+    max-width:700px;
+    margin:80px auto;
+    padding:0 20px;
+}
+
+/* =========================================================
+   ADMIN LOGIN
+   ========================================================= */
+
+.password-field{
+    position: relative;
+}
+
+.password-field input{
+    width: 100%;
+    padding-right: 70px;   /* room for the toggle button */
+}
+
+.toggle-password-btn{
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: none;
+    border: none;
+    color: salmon;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.toggle-password-btn:hover{
+    color: #e56f61;
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD
+   ========================================================= */
+
+.admin-section{
+    max-width: 800px;
+    margin: 50px auto 100px;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-card{
+    text-align: left;
+}
+
+.admin-card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+}
+
+.admin-card-header span{
+    font-family: "Inter", sans-serif;
+    font-size: .85rem;
+    color: #999;
+    font-weight: normal;
+}
+
+/* expandable "show more / show less" text used for long answers
+   (e.g. Join Reason, Message) in admin dashboard cards */
+.text-toggle summary{
+    cursor: pointer;
+    color: #666;
+    list-style: none;
+}
+
+.text-toggle summary::-webkit-details-marker{
+    display: none;
+}
+
+.text-toggle summary::after{
+    content: " (show more)";
+    color: salmon;
+    font-size: .85em;
+}
+
+.text-toggle[open] summary::after{
+    content: " (show less)";
+}
+
+.text-toggle[open] summary{
+    display: none;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    background: #F5EFE6;
+    border-top: 1px solid rgba(0,0,0,.08);
+    margin-top: auto;
+}
+
+.footer-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer p{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: .95rem;
+    color: #666;
+    letter-spacing: .3px;
 }
 
 
@@ -180,6 +1067,13 @@ body.dark-mode .mission-cta p{
 }
 
 
+/* ---------- Admin dashboard ---------- */
+
+body.dark-mode .admin-card-header span{
+    color: #777;
+}
+
+
 /* ---------- Forms ---------- */
 
 body.dark-mode .form-control{
@@ -192,7 +1086,31 @@ body.dark-mode .form-control::placeholder{
     color: #999;
 }
 
-/* Get Involved — donation card */
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form textarea,
+body.dark-mode .contact-form select{
+    background-color: #2a2a2a;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-mode .contact-form input::placeholder,
+body.dark-mode .contact-form textarea::placeholder{
+    color: #999;
+}
+
+body.dark-mode .contact-form select option{
+    background-color: #2a2a2a;
+    color: #eee;
+}
+
+body.dark-mode .toggle-password-btn{
+    color: salmon;
+}
+
+
+/* ---------- Get Involved — donation card ---------- */
+
 body.dark-mode .donation-card{
     background-color: #2a2a2a;
     color: #eee;
@@ -216,27 +1134,6 @@ body.dark-mode .donate-btn:hover{
     background: #e56f61;
 }
 
-body.dark-mode .contact-form input,
-body.dark-mode .contact-form textarea,
-body.dark-mode .contact-form select{
-    background-color: #2a2a2a;
-    color: #eee;
-    border-color: #555;
-}
-
-body.dark-mode .contact-form input::placeholder,
-body.dark-mode .contact-form textarea::placeholder{
-    color: #999;
-}
-
-body.dark-mode .contact-form select option{
-    background-color: #2a2a2a;
-    color: #eee;
-}
-
-body.dark-mode .donate-hero p{
-    color: #bbb;
-}
 
 /* ---------- Footer ---------- */
 
@@ -248,878 +1145,10 @@ body.dark-mode .footer p{
     color: #ccc;
 }
 
-/* =========================================================
-   NAVBAR
-   ========================================================= */
-
-.navbar-sticky{
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 250, 242, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 6px 25px rgba(0,0,0,.06);
-    z-index: 1000;
-}
-
-.navbar-container{
-    max-width: 1250px;
-    margin: auto;
-    padding: 18px 40px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    position: relative;
-}
-
-.navbar-title{
-    font-family: "Cormorant Garamond", serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #2d2d2d;
-    text-decoration: none;
-    letter-spacing: .5px;
-    transition: color .25s ease;
-}
-
-.navbar-title:hover{
-    color: rgb(255, 98, 150);
-}
-
-.navbar-nav{
-    display: flex;
-    align-items: center;
-    gap: 34px;
-
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-link{
-    position: relative;
-
-    font-family: "Inter", sans-serif;
-    font-size: .97rem;
-    font-weight: 600;
-    color: #555;
-    text-decoration: none;
-    letter-spacing: .4px;
-
-    transition: color .25s ease;
-}
-
-.nav-link:hover{
-    color: salmon;
-}
-
-.nav-link::after{
-    content: "";
-
-    position: absolute;
-    left: 50%;
-    bottom: -8px;
-
-    width: 100%;
-    height: 2px;
-
-    background: salmon;
-
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-
-    transition: transform .28s ease;
-}
-
-.nav-link:hover::after{
-    transform: translateX(-50%) scaleX(1);
-}
-
-.nav-actions{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.nav-link.active{
-    color: salmon;
-}
-
-.nav-link.active::after{
-    transform: translateX(-50%) scaleX(1);
-}
-
-/* Hamburger toggle */
-.menu-toggle{
-    display: none;
-
-    width: 46px;
-    height: 46px;
-
-    border: none;
-    background: transparent;
-
-    cursor: pointer;
-
-    font-size: 2rem;
-    color: salmon;
-
-    transition: .25s;
-}
-
-.menu-toggle:hover{
-    color: salmon;
-    transform: rotate(90deg);
-}
-
 
 /* =========================================================
-   HERO
+   RESPONSIVENESS
    ========================================================= */
-
-.hero{
-    position: relative;
-    overflow: hidden;
-
-    height: 85vh;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:50px;
-
-    background:#F8F5F0;
-}
-
-.hero h1{
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(3.5rem,8vw,5.5rem);
-    font-weight: 700;
-
-    margin-bottom: 15px;
-
-    color: #2f2f2f;
-}
-
-.hero p{
-    max-width: 700px;
-
-    font-family: "Inter", sans-serif;
-
-    font-size: 1.1rem;
-    line-height: 1.9;
-
-    color: #666;
-}
-
-.hero a{
-    margin-top: 35px;
-
-    padding: 15px 34px;
-
-    background: rgb(255, 92, 105);
-    color: white;
-
-    text-decoration: none;
-    font-weight: 600;
-
-    border-radius: 50px;
-
-    transition: .3s ease;
-}
-
-.hero h1,
-.hero p,
-.hero a{
-    position: relative;
-    z-index: 1;
-}
-
-.hero a:hover{
-    background: rgb(255, 123, 134);
-    transform: translateY(-3px);
-
-    box-shadow: 0 10px 30px rgba(250,128,114,.35);
-}
-
-.hero a:active{
-    background-color: rgb(255, 80, 95);
-    transform: scale(0.96);
-}
-
-.page-header,
-.donate-hero{
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-btn{
-    margin-top: 35px;
-    padding: 15px 34px;
-    border: none;
-    background: rgb(255, 92, 105);
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: .3s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.hero-btn:hover{
-    background: rgb(255, 123, 134);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(250,128,114,.35);
-}
-
-.hero-btn:active{
-    background-color: rgb(255, 80, 95);
-    transform: scale(0.96);
-}
-
-.delete-btn{
-    margin-top: 15px;
-    padding: 8px 20px;
-    border: 1px solid #e56f61;
-    background: transparent;
-    color: #e56f61;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: .85rem;
-    transition: .3s;
-}
-
-.delete-btn:hover{
-    background: #e56f61;
-    color: white;
-}
-
-
-/* =========================================================
-   PAINT BUCKET (DARK MODE TOGGLE) BUTTON
-   ========================================================= */
-
-.paint-btn{
-    position: static;
-    width: 40px;
-    height: 40px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #2a2a2a;
-
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background .35s ease;
-}
-
-.paint-btn:hover{
-    transform: translateY(-5px) scale(1.08);
-    box-shadow: 0 15px 35px rgba(250, 128, 114, .5);
-}
-
-.paint-btn:active{
-    transform: scale(.92);
-}
-
-.bucket{
-    font-size: 24px;
-    color: rgba(255, 250, 242);
-    transition: transform .8s cubic-bezier(.68,-0.6,.32,1.6), filter .3s ease;
-    transform-origin: center center;
-}
-
-.paint-btn:hover .bucket{
-    filter: drop-shadow(0 0 8px rgba(0,0,0,.25));
-}
-
-.bucket.pouring{
-    transform: rotate(-55deg);
-}
-
-#paintOverlay{
-    position: fixed;
-    top: -100vh;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #2a2a2a;
-    z-index: 6750;
-    overflow: visible;
-    transform: translateY(0);
-    pointer-events: none;
-}
-
-#paintOverlay.cover{
-    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
-    transform: translateY(100vh);
-}
-
-#paintOverlay.reveal{
-    transition: transform 0.7s cubic-bezier(.6,0,.4,1);
-    transform: translateY(200vh);
-}
-
-.wave-edge{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    display: block;
-    opacity: 0;
-    pointer-events: none;
-}
-
-#paintOverlay.cover .wave-edge,
-#paintOverlay.reveal .wave-edge{
-    opacity: 1;
-}
-
-
-/* =========================================================
-   DECORATIONS (sparkles + lilies)
-   ========================================================= */
-
-.sparkle{
-    position:absolute;
-    font-size:28px;
-    color:#F85C9B;
-    opacity:.25;
-    animation:twinkle 4s ease-in-out infinite;
-}
-
-.sparkle-1{
-    top:15%;
-    left:12%;
-}
-
-.sparkle-2{
-    top:26%;
-    right:14%;
-    font-size:42px;
-    animation-delay:1s;
-}
-
-.sparkle-2-small{
-    top:23%;
-    right:11.5%;
-    font-size:18px;
-    opacity:.18;
-    animation:twinkle 4s ease-in-out infinite;
-    animation-delay:1.5s;
-}
-
-.sparkle-3{
-    bottom:18%;
-    left:25%;
-    animation-delay:2s;
-}
-
-.sparkle:nth-child(2){
-    animation-delay:1.5s;
-}
-
-.sparkle:nth-child(3){
-    animation-delay:3s;
-}
-
-@keyframes twinkle{
-    0%,100%{
-        opacity:.2;
-        transform:scale(.9);
-    }
-    50%{
-        opacity:.8;
-        transform:scale(1.15);
-    }
-}
-
-.lily{
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-    opacity: .5;
-
-    filter:
-        drop-shadow(0 0 3px rgb(255, 103, 103))
-        drop-shadow(0 0 6px rgb(255, 103, 103))
-        drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
-}
-
-.lily-left{
-    width: 300px;
-    left: 0;
-    top: 0;
-    opacity: .5;
-    transform: none;
-}
-
-.lily-right{
-    width: 420px;
-    right: 0;
-    bottom: 0;
-    opacity: .55;
-    transform: scaleX(-1) scaleY(-1);
-}
-
-.content-icon{
-    font-size: 2rem;
-    color: salmon;
-    margin-bottom: 12px;
-    display: block;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.footer{
-    background: #F5EFE6;
-    border-top: 1px solid rgba(0,0,0,.08);
-    margin-top: 80px;
-    bottom: 0;
-}
-
-.footer-container{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    text-align: center;
-}
-
-.footer p{
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    font-size: .95rem;
-    color: #666;
-    letter-spacing: .3px;
-}
-
-html{
-    height: 100%;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.footer{
-    margin-top: auto;
-}
-
-
-/* =========================================================
-   GET INVOLVED / DONATE PAGE
-   ========================================================= */
-
-   .contact-section{
-    padding-top: 60px;
-}
-
-.contact-section h1{
-    margin-bottom: 30px;
-}
-
-.page-header .hero-btn{
-    margin-top: 25px;
-}
-
-.donate-hero{
-    padding:100px 25px 70px;
-    text-align:center;
-    background:#F8F5F0;
-}
-
-.donate-hero h1{
-    font-family:"Cormorant Garamond",serif;
-    font-size:4rem;
-    margin-bottom:15px;
-}
-
-.donate-hero p{
-    max-width:700px;
-    margin:auto;
-    font-size:1.05rem;
-    color:#666;
-    line-height:1.8;
-}
-
-.donation-section{
-    display:flex;
-    justify-content:center;
-    padding:80px 20px;
-}
-
-.donation-card{
-    width:500px;
-    max-width:100%;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:40px;
-
-    text-align:center;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
-
-.donation-card h2{
-    margin-bottom:20px;
-}
-
-.qr-box img{
-    width:220px;
-    margin:30px auto;
-    display:block;
-}
-
-.payment-details{
-    margin-top:20px;
-    line-height:1.8;
-}
-
-.donate-btn{
-    margin-top:25px;
-
-    background:salmon;
-    color:white;
-
-    border:none;
-    border-radius:50px;
-
-    padding:14px 32px;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.donate-btn:hover{
-    background:#e56f61;
-    transform:translateY(-2px);
-}
-
-.admin-section{
-    max-width: 800px;
-    margin: 50px auto 100px;
-    padding: 0 20px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.admin-card{
-    text-align: left;
-}
-
-.admin-card-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 1.2rem;
-}
-
-.admin-card-header span{
-    font-family: "Inter", sans-serif;
-    font-size: .85rem;
-    color: #999;
-    font-weight: normal;
-}
-
-body.dark-mode .admin-card-header span{
-    color: #777;
-}
-
-.contact-form select{
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
-    background: white;
-    color: #333;
-    cursor: pointer;
-
-    appearance: none;              /* removes browser's default select styling */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 18px;
-    padding-right: 45px;           /* room for the custom arrow */
-}
-
-.contact-form select:focus{
-    outline: none;
-    border-color: salmon;
-    box-shadow: 0 0 0 3px rgba(250,128,114,.15);   /* soft glow instead of harsh blue ring */
-}
-
-body.dark-mode .contact-form select{
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ccc' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-}
-
-.apply-donate-wrapper{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.apply-donate-wrapper .donation-section,
-.apply-donate-wrapper .contact-section{
-    flex: 1 1 450px;
-    max-width: 500px;
-    margin: 80px 0;
-    padding: 0;
-}
-
-@media (max-width: 900px){
-    .apply-donate-wrapper{
-        flex-direction: column;
-        align-items: center;
-    }
-    .apply-donate-wrapper .donation-section,
-    .apply-donate-wrapper .contact-section{
-        max-width: 100%;
-        margin: 40px 0;
-    }
-}
-
-/* ============== GENERIC PAGE COMPONENTS ============== */
-
-.page-header{
-    background:#F8F5F0;
-    padding:90px 20px;
-    text-align:center;
-}
-
-.page-header h1,
-.page-header p{
-    position: relative;
-    z-index: 1;
-}
-
-.page-header h1{
-    font-family:"Cormorant Garamond", serif;
-    font-size:4rem;
-    margin-bottom:15px;
-}
-
-.page-header p{
-    max-width:700px;
-    margin:auto;
-    color:#666;
-    line-height:1.8;
-}
-
-.content-section{
-    max-width: 1100px;
-    margin: 80px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    box-sizing: border-box;
-}
-.content-card{
-    flex: 1 1 300px;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-@media (max-width: 600px){
-    .content-card{ flex: 1 1 100%; }
-}
-
-.content-card,
-.stat-card{
-    background:white;
-    border-radius:18px;
-    padding:35px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.07);
-
-    transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.content-card:hover,
-.stat-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(0,0,0,.12);
-}
-
-.content-card h2,
-.stat-card h2{
-    font-family:"Cormorant Garamond", serif;
-}
-
-.stats-grid{
-    max-width: 1100px;
-    margin: 80px auto 100px;
-    padding: 0 20px;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-
-    box-sizing: border-box;
-}
-
-.stat-card{
-    flex: 1 1 250px;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-@media (max-width: 600px){
-    .stat-card{
-        flex: 1 1 100%;
-    }
-}
-
-.mission-cta{
-    max-width: 700px;
-    margin: 0 auto 100px;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.mission-cta h2{
-    font-family: "Cormorant Garamond", serif;
-    font-size: 2.4rem;
-    margin-bottom: 10px;
-}
-
-.mission-cta p{
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.7;
-}
-
-.stat-icon{
-    font-size: 2rem;
-    color: salmon;
-    margin-bottom: 12px;
-    display: block;
-}
-
-/* ============== CONTACT PAGE ============== */
-
-.contact-section{
-    max-width:700px;
-    margin:80px auto;
-    padding:0 20px;
-}
-
-.contact-form{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-.contact-form input,
-.contact-form textarea{
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:"Inter", sans-serif;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus{
-    outline:none;
-    border-color:salmon;
-}
-
-.btn-primary{
-    display: inline-block;
-    margin-top: 15px;
-    padding:15px 30px;
-    border:none;
-    background: rgb(255, 92, 105);
-    color:white;
-    border-radius:50px;
-    cursor:pointer;
-    transition:.3s;
-    text-decoration: none;
-}
-
-.btn-primary:hover{
-    background:rgb(255, 123, 134);
-    transform:translateY(-2px);
-}
-
-.btn-primary:active{
-    background-color: rgb(255, 80, 95);
-    transform: scale(0.96);
-}
-
-.password-field{
-    position: relative;
-}
-
-.password-field input{
-    width: 100%;
-    padding-right: 70px;   /* room for the toggle button */
-}
-
-.toggle-password-btn{
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    background: none;
-    border: none;
-    color: salmon;
-    font-size: .85rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 4px 8px;
-}
-
-.toggle-password-btn:hover{
-    color: #e56f61;
-}
-
-body.dark-mode .toggle-password-btn{
-    color: salmon;
-}
-
-/* ============== RESPONSIVENESS ============== */
 
 @media (max-width: 1024px){
 
@@ -1197,6 +1226,18 @@ body.dark-mode .toggle-password-btn{
         right: 60px;
         width: 36px;
         height: 36px;
+    }
+
+    /* get involved layout */
+    .apply-donate-wrapper{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .apply-donate-wrapper .donation-section,
+    .apply-donate-wrapper .apply-section{
+        max-width: 100%;
+        margin: 40px 0;
     }
 
 }
@@ -1288,6 +1329,11 @@ body.dark-mode .toggle-password-btn{
 
 }
 
+@media (max-width: 600px){
+    .content-card{ flex: 1 1 100%; }
+    .stat-card{ flex: 1 1 100%; }
+}
+
 @media (max-width: 480px){
 
     /* navbar */
@@ -1336,7 +1382,8 @@ body.dark-mode .toggle-password-btn{
     .bucket{
         font-size: 18px;
     }
-    
+
+    /* cards */
     .content-card,
     .stat-card{
         padding: 25px;

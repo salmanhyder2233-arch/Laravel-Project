@@ -48,7 +48,7 @@
 
     </section>
 
-    <section class="contact-section">
+    <section class="apply-section">
         <h2 style="text-align:center;">Apply to Help</h2>
         <p style="text-align:center; color:#666;">Choose a role and tell us a bit about yourself.</p>
 

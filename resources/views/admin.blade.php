@@ -43,6 +43,11 @@
             </div>
             <p><strong>Email:</strong> {{ $application->email }}</p>
             <p><strong>Applying for:</strong> {{ $application->role }}</p>
+            <p><strong>Join Reason:</strong></p>
+            <details class="text-toggle">
+                <summary>{{ \Illuminate\Support\Str::limit($application->join_reason, 80) }}</summary>
+                <p>{{ $application->join_reason }}</p>
+            </details>            
             <p>{{ $application->message }}</p>
 
             <form method="POST" action="{{ url('/admin/application/'.$application->id) }}" onsubmit="return confirm('Delete this application?');">
