@@ -35,7 +35,7 @@
 
             <div class="payment-details">
                 <p><strong>EasyPaisa Number</strong></p>
-                <p>03XX-XXXXXXX</p>
+                <p>03154706813</p>
                 <p><strong>Account Name</strong></p>
                 <p>Together We Care</p>
             </div>
@@ -86,7 +86,7 @@ const copyBtn = document.getElementById("copyNumber");
 
 copyBtn.addEventListener("click", () => {
 
-    navigator.clipboard.writeText("03XX-XXXXXXX");
+    navigator.clipboard.writeText("03154706813");
 
     copyBtn.textContent = "Copied!";
 

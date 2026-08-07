@@ -878,32 +878,37 @@ body::before{
     font-weight: normal;
 }
 
-/* expandable "show more / show less" text used for long answers
-   (e.g. Join Reason, Message) in admin dashboard cards */
-.text-toggle summary{
-    cursor: pointer;
-    color: #666;
-    list-style: none;
+/* Expandable messages in admin dashboard */
+
+.admin-message {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    word-break: break-word;
 }
 
-.text-toggle summary::-webkit-details-marker{
-    display: none;
+.admin-message.expanded {
+    display: block;
+    overflow: visible;
 }
 
-.text-toggle summary::after{
-    content: " (show more)";
+.message-toggle {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-top: 5px;
     color: salmon;
-    font-size: .85em;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.text-toggle[open] summary::after{
-    content: " (show less)";
+.message-toggle:hover {
+    text-decoration: underline;
 }
-
-.text-toggle[open] summary{
-    display: none;
-}
-
 
 /* =========================================================
    FOOTER

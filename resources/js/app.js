@@ -62,3 +62,32 @@ btn.addEventListener("click", () => {
 
     }, POUR_MS);
 });
+
+// Show more toggle
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toggleButtons = document.querySelectorAll(".message-toggle");
+
+    toggleButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const message = button.previousElementSibling;
+
+            if (!message) {
+                return;
+            }
+
+            message.classList.toggle("expanded");
+
+            if (message.classList.contains("expanded")) {
+                button.textContent = "Show less";
+            } else {
+                button.textContent = "Show more";
+            }
+
+        });
+
+    });
+
+});

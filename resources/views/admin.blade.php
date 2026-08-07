@@ -45,11 +45,10 @@
             <p><strong>Applying for:</strong> {{ $application->role }}</p>
             <p><strong>Join Reason:</strong> {{ $application->join_reason }}</p>
             <p>{{ $application->message }}</p>
-            <details class="text-toggle">
-                <summary>{{ \Illuminate\Support\Str::limit($application->message, 80) }}</summary>
-                <p>{{ $application->message }}</p>
-            </details>            
-
+                <div class="admin-message-wrapper">
+                    <p class="admin-message">{{ $submission->message }}</p>
+                    <button type="button" class="message-toggle">Show more</button>
+                </div>            
 
             <form method="POST" action="{{ url('/admin/application/'.$application->id) }}" onsubmit="return confirm('Delete this application?');">
                 @csrf
