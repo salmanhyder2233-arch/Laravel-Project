@@ -35,8 +35,8 @@
 
     <div class="content-card">
         <h2>Our Impact</h2>
-        <p>See the real difference your support has made so far.</p>
-        <a href="{{ url('/impact') }}" class="btn-primary">See Our Impact</a>
+        <p>See the real difference your support has made so far. Check out the progress we've made together.</p>
+        <a href="{{ url('/impact') }}" class="btn-primary">Learn More</a>
     </div>
 
 

@@ -14,6 +14,7 @@ class ApplicationController extends Controller
             'email'   => 'required|email|max:255',
             'role'    => 'required|string|max:255',
             'message' => 'nullable|string|max:2000',
+            'join_reason' => 'required|string|max:255',
         ]);
 
         Application::create($validated);
