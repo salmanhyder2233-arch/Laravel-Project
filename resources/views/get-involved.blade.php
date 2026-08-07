@@ -34,7 +34,7 @@
             </div>
 
             <div class="payment-details">
-                <p><strong>EasyPaisa Number</strong></p>
+                <p><strong>JazzCash Number</strong></p>
                 <p>03154706813</p>
                 <p><strong>Account Name</strong></p>
                 <p>Together We Care</p>
