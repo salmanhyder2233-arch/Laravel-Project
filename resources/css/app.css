@@ -19,6 +19,15 @@
    BASE / RESET
    ========================================================= */
 
+/* Global box-sizing reset — without this, padding on any element
+   with a fixed/max width (e.g. .donation-card) adds on top of that
+   width instead of being included in it, causing overflow on mobile. */
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
 html{
     height: 100%;
 }
@@ -53,7 +62,7 @@ body::before{
 
 
 /* =========================================================
-   SITE-WIDE COMPONENTS
+   SITE-WIDE COMPONENTS (appear on every / most pages)
    ========================================================= */
 
 /* ---------- Navbar ---------- */
@@ -693,6 +702,16 @@ body::before{
 }
 
 
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+
+.contact-section{
+    max-width:700px;
+    margin:80px auto;
+    padding:0 20px;
+}
+
 
 /* =========================================================
    GET INVOLVED (DONATE + APPLY)
@@ -801,15 +820,6 @@ body::before{
     padding: 0;
 }
 
-/* =========================================================
-   CONTACT PAGE
-   ========================================================= */
-
-.contact-section{
-    max-width:700px;
-    margin:80px auto;
-    padding:0 20px;
-}
 
 /* =========================================================
    ADMIN LOGIN
@@ -878,37 +888,32 @@ body::before{
     font-weight: normal;
 }
 
-/* Expandable messages in admin dashboard */
-
-.admin-message {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    overflow: hidden;
-    word-break: break-word;
-}
-
-.admin-message.expanded {
-    display: block;
-    overflow: visible;
-}
-
-.message-toggle {
-    border: none;
-    background: none;
-    padding: 0;
-    margin-top: 5px;
-    color: salmon;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
+/* expandable "show more / show less" text used for long answers
+   (e.g. Join Reason, Message) in admin dashboard cards */
+.text-toggle summary{
     cursor: pointer;
+    color: #666;
+    list-style: none;
 }
 
-.message-toggle:hover {
-    text-decoration: underline;
+.text-toggle summary::-webkit-details-marker{
+    display: none;
 }
+
+.text-toggle summary::after{
+    content: " (show more)";
+    color: salmon;
+    font-size: .85em;
+}
+
+.text-toggle[open] summary::after{
+    content: " (show less)";
+}
+
+.text-toggle[open] summary{
+    display: none;
+}
+
 
 /* =========================================================
    FOOTER
