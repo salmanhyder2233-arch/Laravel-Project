@@ -742,10 +742,10 @@ body::before{
 }
 
 .donation-card{
-    width:500px;
+    width:390px;
     max-width:100%;
     min-width:0;
-    
+
     background:white;
     border-radius:20px;
     padding:40px;
