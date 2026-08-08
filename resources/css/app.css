@@ -19,9 +19,7 @@
    BASE / RESET
    ========================================================= */
 
-/* Global box-sizing reset — without this, padding on any element
-   with a fixed/max width (e.g. .donation-card) adds on top of that
-   width instead of being included in it, causing overflow on mobile. */
+/* Global box-sizing reset */
 *,
 *::before,
 *::after{
@@ -746,15 +744,12 @@ body::before{
 .donation-card{
     width:500px;
     max-width:100%;
-
+    min-width:0;
+    
     background:white;
-
     border-radius:20px;
-
     padding:40px;
-
     text-align:center;
-
     box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
