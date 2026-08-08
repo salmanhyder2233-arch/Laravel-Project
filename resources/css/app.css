@@ -739,10 +739,11 @@ body::before{
     display:flex;
     justify-content:center;
     padding:80px 20px;
+    min-width: 0;
 }
 
 .donation-card{
-    width:390px;
+    width:500px;
     max-width:100%;
     min-width:0;
 

@@ -31,7 +31,7 @@
 
             <div class="payment-details">
                 <p><strong>JazzCash Number</strong></p>
-                <p>03154706813</p>
+                <p>03xxxxxxxx</p>
                 <p><strong>Account Name</strong></p>
                 <p>Together We Care</p>
             </div>
