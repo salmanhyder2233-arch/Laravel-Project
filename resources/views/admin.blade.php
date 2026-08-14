@@ -22,7 +22,8 @@
             </div>
             <p><strong>Email:</strong> {{ $submission->email }}</p>
             <p><strong>Subject:</strong> {{ $submission->subject }}</p>
-            <p>{{ $submission->message }}</p>
+            <p class="admin-text">{{ $submission->message }}</p>
+            <span class="admin-toggle">Show more</span>
 
             <form method="POST" action="{{ url('/admin/submission/'.$submission->id) }}" onsubmit="return confirm('Delete this submission?');">
                 @csrf
