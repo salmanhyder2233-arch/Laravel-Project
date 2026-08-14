@@ -44,7 +44,7 @@
 
     </section>
 
-    <section class="apply-section">
+    <section class="apply-section" id="apply-section">
         <h2 style="text-align:center;">Apply to Help</h2>
         <p style="text-align:center; color:#666;">Choose a role and tell us a bit about yourself.</p>
 
@@ -63,9 +63,11 @@
                 <option value="Volunteer">Volunteer</option>
             </select>
 
-            <textarea name="join_reason" rows="3" required placeholder="Why do you want to join TWC?">{{ old('join_reason') }}</textarea>
+            <textarea name="join_reason" id="join_reason" rows="3" required maxlength="250" placeholder="Why do you want to join TWC?">{{ old('join_reason') }}</textarea>
+            <p class="char-counter"><span id="join_reason_count">0</span>/250</p>
 
-            <textarea name="message" rows="5" placeholder="Anything you'd like us to know? (optional)">{{ old('message') }}</textarea>
+            <textarea name="message" id="message" rows="5" maxlength="500" placeholder="Anything you'd like us to know? (optional)">{{ old('message') }}</textarea>
+            <p class="char-counter"><span id="message_count">0</span>/500</p>
 
             <button type="submit" class="btn-primary">Submit Application</button>
         </form>

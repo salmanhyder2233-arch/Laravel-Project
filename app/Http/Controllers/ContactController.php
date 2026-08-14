@@ -20,6 +20,6 @@ class ContactController extends Controller
 
 // Email temporarily disabled while configuring production
 
-        return back()->with('success', 'Message sent — thanks for reaching out!');
+        return redirect(url()->previous() . '#contact-section')->with('success', 'Message sent — thanks for reaching out!');
     }
 }

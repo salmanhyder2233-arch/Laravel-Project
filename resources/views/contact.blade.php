@@ -14,7 +14,7 @@
 
     </section>
 
-    <section class="contact-section">
+    <section class="contact-section" id="contact-section">
 
         <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
             @csrf

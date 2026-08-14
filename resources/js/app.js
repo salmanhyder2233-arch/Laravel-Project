@@ -9,6 +9,18 @@ const overlay = document.getElementById("paintOverlay");
 const POUR_MS = 700;
 const HOLD_MS = 1000;
 
+document.querySelectorAll("textarea[maxlength]").forEach((textarea) => {
+    const counter = document.getElementById(textarea.id + "_count");
+    if (!counter) return;
+
+    const updateCount = () => {
+        counter.textContent = textarea.value.length;
+    };
+
+    updateCount();
+    textarea.addEventListener("input", updateCount);
+});
+
 // Apply saved theme immediately on page load
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
@@ -61,33 +73,4 @@ btn.addEventListener("click", () => {
         }, HOLD_MS);
 
     }, POUR_MS);
-});
-
-// Show more toggle
-document.addEventListener("DOMContentLoaded", function () {
-
-    const toggleButtons = document.querySelectorAll(".message-toggle");
-
-    toggleButtons.forEach(function (button) {
-
-        button.addEventListener("click", function () {
-
-            const message = button.previousElementSibling;
-
-            if (!message) {
-                return;
-            }
-
-            message.classList.toggle("expanded");
-
-            if (message.classList.contains("expanded")) {
-                button.textContent = "Show less";
-            } else {
-                button.textContent = "Show more";
-            }
-
-        });
-
-    });
-
 });

@@ -13,12 +13,11 @@ class ApplicationController extends Controller
             'name'    => 'required|string|max:255',
             'email'   => 'required|email|max:255',
             'role'    => 'required|string|max:255',
-            'message' => 'nullable|string|max:2000',
-            'join_reason' => 'required|string|max:255',
+            'message' => 'nullable|string|max:500',
+            'join_reason' => 'required|string|max:250',
         ]);
 
         Application::create($validated);
 
-        return back()->with('success', 'Application submitted — thank you!');
-    }
+        return redirect(url()->previous() . '#apply-section')->with('success', 'Application submitted — thank you!');    }
 }

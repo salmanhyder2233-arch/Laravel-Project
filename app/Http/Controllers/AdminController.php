@@ -11,9 +11,14 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $submissions = ContactSubmission::latest()->get();
-        $applications = Application::latest()->get();
 
-        return view('admin', compact('submissions', 'applications'));
+        $roleFilter = $request->query('role');
+
+        $applications = Application::when($roleFilter, function ($query, $roleFilter) {
+        $query->where('role', $roleFilter);
+        })->latest()->get();
+
+        return view('admin', compact('submissions', 'applications', 'roleFilter'));
     }
 
     public function deleteSubmission($id)

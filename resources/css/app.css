@@ -43,6 +43,21 @@ body{
     overflow-x: hidden;
 }
 
+body{
+    animation: pageFadeIn .5s ease;
+}
+
+@keyframes pageFadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* soft radial-gradient background decor, fixed behind all content */
 body::before{
     content:"";
@@ -810,6 +825,13 @@ body::before{
     }
 }
 
+.char-counter{
+    text-align: right;
+    font-size: .8rem;
+    color: #999;
+    margin-top: -12px;
+}
+
 /* =========================================================
    ADMIN LOGIN
    ========================================================= */
@@ -844,8 +866,8 @@ body::before{
 
 
 /* =========================================================
-   ADMIN DASHBOARD
-   ========================================================= */
+ADMIN DASHBOARD
+========================================================= */
 
 .admin-section{
     max-width: 800px;
@@ -878,7 +900,8 @@ body::before{
 }
 
 /* expandable "show more / show less" text used for long answers
-   (e.g. Join Reason, Message) in admin dashboard cards */
+(e.g. Join Reason, Message) in admin dashboard cards */
+
 .text-toggle summary{
     cursor: pointer;
     color: #666;
@@ -903,6 +926,33 @@ body::before{
     display: none;
 }
 
+.role-tabs{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.role-tab{
+    padding: 8px 18px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    color: #666;
+    text-decoration: none;
+    font-size: .9rem;
+    transition: .2s;
+}
+
+.role-tab:hover{
+    border-color: salmon;
+    color: salmon;
+}
+
+.role-tab.active{
+    background: salmon;
+    color: white;
+    border-color: salmon;
+}
 
 /* =========================================================
    FOOTER
@@ -1240,35 +1290,32 @@ body.dark-mode .footer p{
     }
 
     .navbar-nav{
-        display:none;
-        flex-direction:column;
+    flex-direction:column;
 
-        position:absolute;
-        top:100%;
-        left:20px;
-        right:20px;
+    position:absolute;
+    top:100%;
+    left:20px;
+    right:20px;
 
-        background:#fff;
-        border-radius:18px;
-        padding:25px;
-        gap:18px;
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    gap:18px;
 
-        box-shadow:0 15px 35px rgba(0,0,0,.12);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
 
-        opacity:0;
-        visibility:hidden;
-        transform:translateY(-15px);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-15px);
 
-        transition:.3s;
-    }
+    transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
 
-    .navbar-nav.active{
-        display:flex;
-        opacity:1;
-        visibility:visible;
-        transform:translateY(0);
-    }
-
+.navbar-nav.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
     /* hero */
     .hero{
         height:auto;
