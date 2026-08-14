@@ -39,9 +39,6 @@
     <div class="role-tabs">
         <a href="{{ url('/twc-panel-8x2') }}" class="role-tab {{ !$roleFilter ? 'active' : '' }}">All</a>
         <a href="{{ url('/twc-panel-8x2') }}?role=Role 1 Name" class="role-tab {{ $roleFilter == 'Role 1 Name' ? 'active' : '' }}">Ambassador</a>
-        <a href="{{ url('/twc-panel-8x2') }}?role=Role 2 Name" class="role-tab {{ $roleFilter == 'Role 2 Name' ? 'active' : '' }}">Finance</a>
-        <a href="{{ url('/twc-panel-8x2') }}?role=Role 3 Name" class="role-tab {{ $roleFilter == 'Role 3 Name' ? 'active' : '' }}">Social Media</a>
-        <a href="{{ url('/twc-panel-8x2') }}?role=Role 4 Name" class="role-tab {{ $roleFilter == 'Role 4 Name' ? 'active' : '' }}">Outreach</a>
         <a href="{{ url('/twc-panel-8x2') }}?role=Volunteer" class="role-tab {{ $roleFilter == 'Volunteer' ? 'active' : '' }}">Volunteer</a>
     </div>
 
@@ -54,20 +51,16 @@
             <p><strong>Email:</strong> {{ $application->email }}</p>
             <p><strong>Applying for:</strong> {{ $application->role }}</p>
             <p><strong>Join Reason:</strong></p>
-            <details class="text-toggle">
-                <summary>{{ \Illuminate\Support\Str::limit($application->join_reason, 80) }}</summary>
-                <p>{{ $application->join_reason }}</p>
-            </details>
+            <p class="admin-text">{{ $application->join_reason }}</p>
+            <span class="admin-toggle">Show more</span>
 
             @if ($application->message)
                 <p><strong>Message:</strong></p>
-                <details class="text-toggle">
-                    <summary>{{ \Illuminate\Support\Str::limit($application->message, 80) }}</summary>
-                    <p>{{ $application->message }}</p>
-                </details>
+                <p class="admin-text">{{ $application->message }}</p>
+                <span class="admin-toggle">Show more</span>
             @endif
 
-            <form method="POST" action="{{ url('/admin/application/'.$application->id) }}" onsubmit="return confirm('Delete this submission?');">
+            <form method="POST" action="{{ url('/admin/application/'.$application->id) }}" onsubmit="return confirm('Delete this application?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="delete-btn">Delete</button>

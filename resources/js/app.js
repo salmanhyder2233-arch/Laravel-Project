@@ -21,6 +21,35 @@ document.querySelectorAll("textarea[maxlength]").forEach((textarea) => {
     textarea.addEventListener("input", updateCount);
 });
 
+// Admin dashboard — expand/collapse long text
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".admin-toggle").forEach(function (toggle) {
+
+        toggle.addEventListener("click", function () {
+            const text = toggle.previousElementSibling;
+            if (!text) return;
+
+            text.classList.toggle("expanded");
+            toggle.textContent = text.classList.contains("expanded") ? "Show less" : "Show more";
+        });
+
+    });
+
+    document.querySelectorAll(".admin-text").forEach(function (text) {
+
+        text.addEventListener("click", function () {
+            text.classList.toggle("expanded");
+            const toggle = text.nextElementSibling;
+            if (toggle && toggle.classList.contains("admin-toggle")) {
+                toggle.textContent = text.classList.contains("expanded") ? "Show less" : "Show more";
+            }
+        });
+
+    });
+
+});
+
 // Apply saved theme immediately on page load
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");

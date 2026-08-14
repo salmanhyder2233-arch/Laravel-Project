@@ -902,28 +902,31 @@ ADMIN DASHBOARD
 /* expandable "show more / show less" text used for long answers
 (e.g. Join Reason, Message) in admin dashboard cards */
 
-.text-toggle summary{
+.admin-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     cursor: pointer;
-    color: #666;
-    list-style: none;
+    margin-bottom: 4px;
 }
 
-.text-toggle summary::-webkit-details-marker{
-    display: none;
+.admin-text.expanded{
+    -webkit-line-clamp: unset;
+    display: block;
 }
 
-.text-toggle summary::after{
-    content: " (show more)";
+.admin-toggle{
     color: salmon;
-    font-size: .85em;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
-.text-toggle[open] summary::after{
-    content: " (show less)";
-}
-
-.text-toggle[open] summary{
-    display: none;
+.admin-toggle:hover{
+    color: #e56f61;
 }
 
 .role-tabs{

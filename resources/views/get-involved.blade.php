@@ -57,9 +57,6 @@
             <select name="role" required>
                 <option value="" disabled selected>Which role are you applying for?</option>
                 <option value="Role 1 Name">Ambassador</option>
-                <option value="Role 2 Name">Finance</option>
-                <option value="Role 3 Name">Social Media</option>
-                <option value="Role 4 Name">Outreach</option>
                 <option value="Volunteer">Volunteer</option>
             </select>
 
