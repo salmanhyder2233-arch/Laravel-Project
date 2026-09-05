@@ -16,6 +16,19 @@
 
 </section>
 
+@php
+    $percent = $settings->goal_amount > 0 ? min(100, round(($settings->raised_amount / $settings->goal_amount) * 100)) : 0;
+@endphp
+
+<div class="progress-wrapper">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ $percent }}%;"></div>
+    </div>
+    <p class="progress-label">
+        PKR {{ number_format($settings->raised_amount) }} raised of {{ number_format($settings->goal_amount) }} goal ({{ $percent }}%)
+    </p>
+</div>
+
 <div class="apply-donate-wrapper">
 
     <section class="donation-section">

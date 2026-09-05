@@ -13,6 +13,16 @@
 
 <section class="admin-section">
 
+    <h2>Donation Progress</h2>
+    <form method="POST" action="{{ url('/admin/settings') }}" class="settings-form">
+        @csrf
+        <label>Raised (PKR)</label>
+        <input type="number" name="raised_amount" value="{{ $settings->raised_amount }}">
+        <label>Goal (PKR)</label>
+        <input type="number" name="goal_amount" value="{{ $settings->goal_amount }}">
+        <button type="submit" class="btn-primary">Update</button>
+    </form>
+
     <h2>Contact Submissions</h2>
     @forelse ($submissions as $submission)
         <div class="content-card admin-card">
