@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Models\SiteSetting;
+
 
 Route::get('/', function () {
     return view('home');
@@ -26,7 +28,8 @@ Route::get('/contact', function () {
 });
 
 Route::get('/get-involved', function () {
-    return view('get-involved');
+    $settings = SiteSetting::first();
+    return view('get-involved', compact('settings'));
 });
 
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
@@ -40,6 +43,7 @@ Route::middleware('admin.password')->group(function () {
     Route::get('/twc-panel-8x2', [AdminController::class, 'index']);
     Route::delete('/admin/submission/{id}', [AdminController::class, 'deleteSubmission']);
     Route::delete('/admin/application/{id}', [AdminController::class, 'deleteApplication']);
+    Route::post('/admin/settings', [AdminController::class, 'updateSettings']);
 });
 
 Route::post('/admin-logout', function (\Illuminate\Http\Request $request) {
