@@ -416,6 +416,44 @@ body.dark-mode .progress-bar{
     background: #444;
 }
 
+.settings-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.settings-form label{
+    display: block;
+    font-size: .85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.settings-form input{
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    width: 150px;
+}
+
+.settings-form input:focus{
+    outline: none;
+    border-color: salmon;
+}
+
+body.dark-mode .settings-form label{
+    color: #bbb;
+}
+
+body.dark-mode .settings-form input{
+    background-color: #2a2a2a;
+    color: #eee;
+    border-color: #555;
+}
+
 /* ---------- Generic reusable buttons ---------- */
 
 .hero-btn{
